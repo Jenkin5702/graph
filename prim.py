@@ -1,9 +1,9 @@
 import numpy as np
-
+import scipy as scp
 
 def prim(C):
-    A = np.array(C)
-    A[A == 0] = 100
+    A = np.array(C).astype(np.float32)
+    A[A==0]=scp.inf
     l = A.shape[0]
     B = np.zeros(A.shape)
 
@@ -13,8 +13,8 @@ def prim(C):
     s = {x, y}
     B[x][y] = A[x][y]
     B[y][x] = A[x][y]
-    A[x][y] = 100
-    A[y][x] = 100
+    A[x][y] = scp.inf
+    A[y][x] = scp.inf
     for n in range(2,l):
         E = np.array([])
         for i in s:
@@ -25,8 +25,8 @@ def prim(C):
         s = s | {x, y}
         B[x][y] = A[x][y]
         B[y][x] = A[x][y]
-        A[x][y] = 100
-        A[y][x] = 100
+        A[x][y] = scp.inf
+        A[y][x] = scp.inf
 
     return B
 

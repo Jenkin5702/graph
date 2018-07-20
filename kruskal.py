@@ -1,15 +1,16 @@
 import numpy as np
 
+import scipy as scp
 
 def kruskal(C):
-    A = np.array(C)
+    A = np.array(C).astype(np.float32)
+    A[A==0]=scp.inf
     l = A.shape[0]
     B = np.zeros(A.shape)
     for n in range(0, l - 1):
         loc = np.where(A == A.min())
         x = loc[0][0]
         y = loc[1][0]
-        print([x, y])
         cir = False
         for i in range(0, l):
             if B[x][i] * B[i][y] != 0:
@@ -18,8 +19,8 @@ def kruskal(C):
         if not cir:
             B[x][y] = A[x][y]
             B[y][x] = A[x][y]
-        A[x][y] = 100
-        A[y][x] = 100
+        A[x][y] = scp.inf
+        A[y][x] = scp.inf
     return B
 
 

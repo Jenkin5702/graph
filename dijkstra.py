@@ -1,8 +1,9 @@
 import numpy as np
-
+import scipy as scp
 
 def dijkstra(C):
-    A=np.array(C)
+    A=np.array(C).astype(np.float32)
+    A[A==0]=scp.inf
     m = A.shape[0]
     r = range(0, m)
     while True:
@@ -17,10 +18,10 @@ def dijkstra(C):
             if finished:
                 return A
 
-a = np.array([[100, 5, 9, 100, 100],
-              [5, 100, 3, 100, 100],
-              [9, 3, 100, 100, 7],
-              [100, 100, 100, 100, 5],
-              [100, 100, 7, 5, 100]])
-
+a = np.array([[0, 10, 0, 30, 100],
+              [0, 0, 50, 0, 0],
+              [0, 0, 0, 0, 10],
+              [0, 0, 0, 0, 60],
+              [0, 0, 0, 0, 0]])
+a=a+a.T
 print dijkstra(a)
