@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def dj(C):
+def dijkstra(C):
     A=np.array(C)
     m = A.shape[0]
     r = range(0, m)
@@ -23,4 +23,4 @@ a = np.array([[100, 5, 9, 100, 100],
               [100, 100, 100, 100, 5],
               [100, 100, 7, 5, 100]])
 
-print dj(a)
+print dijkstra(a)
